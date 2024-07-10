@@ -618,7 +618,7 @@ void OpSsePmovzxbw(P) {
   memcpy(dst + 0xC, src + 0x3, src_width);
   memcpy(dst + 0x8, src + 0x2, src_width);
   memcpy(dst + 0x4, src + 0x1, src_width);
-  // memcpy(dst + 0x0, src + 0x0, src_width);
+  memcpy(dst + 0x0, src + 0x0, src_width);
 
   memset(dst + 0xC + src_width, 0, dst_width_zx);
   memset(dst + 0x8 + src_width, 0, dst_width_zx);
