@@ -1225,7 +1225,13 @@ const char *DisSpecMap2(struct XedDecodedInst *x, char *p) {
     RCASE(0x29, "pcmpeqq %Vdq Wdq");
     RCASE(0x2A, "movntdqa %Vdq Mdq");
     RCASE(0x2B, "packusdw %Vdq Wdq");
+
+    // TODO: fix formatting for xmm0 xmm1
+    // this is showing (rax) instead of xmm0
     RCASE(0x30, "pmovzxbw %Vdq Mq");
+    // this shows ecx instead of xmm1
+    // RCASE(0x30, Osz(x->op.rde) ? "pmovzxbw %Gdqp %Udq" : "pmovzxbw %Gdqp %Nq");
+
     RCASE(0x31, "pmovzxbd %Vdq Md");
     RCASE(0x32, "pmovzxbq %Vdq Mw");
     RCASE(0x33, "pmovzxwd %Vdq Mq");

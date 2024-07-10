@@ -629,6 +629,8 @@ void OpSsePmovzxbw(P) {
   IGNORE_RACES_END()
 
   // TODO: jit?
+
+  // TODO: hint blinkenlights to change register size to word
 }
 
 void OpSsePmovzxwd(P) {
