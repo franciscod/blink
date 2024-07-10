@@ -681,6 +681,8 @@ void OpMovWpsVps(P);
 void OpMovntdqaVdqMdq(P);
 void OpMovntiMdqpGdqp(P);
 void OpPmovmskbGdqpNqUdq(P);
+void OpSsePmovzxbw(P);
+void OpSsePmovzxwd(P);
 
 void OpUnpcklpsd(P);
 void OpUnpckhpsd(P);

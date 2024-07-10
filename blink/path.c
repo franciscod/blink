@@ -511,6 +511,8 @@ static bool IsPure(u64 rde) {
       return IsModrmRegister(rde) &&  //
              (ModrmReg(rde) == 0 ||   // inc
               ModrmReg(rde) == 1);    // dec
+    // TODO: consider pmovzxbw
+    // TODO: consider pmovzxwd
     default:
       return false;
   }

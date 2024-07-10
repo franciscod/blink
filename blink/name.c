@@ -546,11 +546,15 @@ const char *DescribeMopcode(int code) {
     XLAT(0x209, "OpSsePsignw");
     XLAT(0x20A, "OpSsePsignd");
     XLAT(0x20B, "OpSsePmulhrsw");
+    XLAT(0x210, "OpSsePblendvb");
     XLAT(0x21c, "OpSsePabsb");
     XLAT(0x21d, "OpSsePabsw");
     XLAT(0x21e, "OpSsePabsd");
     XLAT(0x22a, "OpMovntdqaVdqMdq");
+    XLAT(0x230, "OpSsePmovzxbw");
+    XLAT(0x233, "OpSsePmovzxwd");
     XLAT(0x240, "OpSsePmulld");
+    XLAT(0x30e, "OpSsePblendw");
     XLAT(0x30f, "OpSsePalignr");
     XLAT(0x344, "OpSsePclmulqdq");
     default:

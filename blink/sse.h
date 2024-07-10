@@ -5,6 +5,7 @@
 #include "blink/modrm.h"
 #include "blink/tsan.h"
 
+void OpSsePblendvb(P);
 void OpSsePabsb(P);
 void OpSsePabsd(P);
 void OpSsePabsw(P);
@@ -19,6 +20,7 @@ void OpSsePaddsw(P);
 void OpSsePaddusb(P);
 void OpSsePaddusw(P);
 void OpSsePaddw(P);
+void OpSsePblendw(P);
 void OpSsePalignr(P);
 void OpSsePand(P);
 void OpSsePandn(P);

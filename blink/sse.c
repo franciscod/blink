@@ -595,6 +595,34 @@ static void SsePalignr(u8 x[16], const u8 y[16], unsigned k) {
   memcpy(x, t + MIN(k, 32), 16);
 }
 
+static void SsePblendw(u8 x[16], const u8 y[16], unsigned k) {
+  unsigned i;
+  u8 t[16];
+  for (i = 0; i < 8; ++i) {
+    if (k & (1 << i)) {
+      t[i*2+0] = y[i*2+0];
+      t[i*2+1] = y[i*2+1];
+    } else {
+      t[i*2+0] = x[i*2+0];
+      t[i*2+1] = x[i*2+1];
+    }
+  }
+  memcpy(x, t, 16);
+}
+
+static void SsePblendvb(u8 x[16], const u8 y[16], const u8 mask[16]) {
+  unsigned i;
+  u8 t[16];
+  for (i = 0; i < 16; ++i) {
+    if (mask[i] & (1 << 7)) {
+      t[i] = y[i];
+    } else {
+      t[i] = x[i];
+    }
+  }
+  memcpy(x, t, 16);
+}
+
 static void SsePsubd(u8 x[16], const u8 y[16]) {
 #if X86_INTRINSICS
   asm("psubd\t%1,%0" : "+x"(*(char_xmma_t *)x) : "xm"(*(const char_xmma_t *)y));
@@ -1479,6 +1507,16 @@ optimizesize void Op173(P) {
     default:
       OpUdImpl(m);
   }
+}
+
+void OpSsePblendw(P) {
+  SsePblendw(XmmRexrReg(m, rde), GetModrmRegisterXmmPointerRead16(A), uimm0);
+}
+
+void OpSsePblendvb(P) {
+  SsePblendvb(XmmRexrReg(m, rde), 
+              GetModrmRegisterXmmPointerRead16(A),
+              XmmRexrReg(m, 0)); // implicit xmm0
 }
 
 void OpSsePalignr(P) {

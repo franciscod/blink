@@ -2071,16 +2071,20 @@ nexgen32e_f GetOp(long op) {
     return kNexgen32e[op];
   } else {
     switch (op) {
+      XLAT(0x210, OpSsePblendvb);
       XLAT(0x21c, OpSsePabsb);
       XLAT(0x21d, OpSsePabsw);
       XLAT(0x21e, OpSsePabsd);
       XLAT(0x22a, OpMovntdqaVdqMdq);
+      XLAT(0x230, OpSsePmovzxbw);
+      XLAT(0x233, OpSsePmovzxwd);
       XLAT(0x240, OpSsePmulld);
       XLAT(0x2f0, Op2f01);
       XLAT(0x2f1, Op2f01);
       XLAT(0x2f5, Op2f5);
       XLAT(0x2f6, Op2f6);
       XLAT(0x2f7, OpShx);
+      XLAT(0x30e, OpSsePblendw);
       XLAT(0x30f, OpSsePalignr);
       XLAT(0x344, OpSsePclmulqdq);
       XLAT(0x3f0, OpRorx);

@@ -599,6 +599,66 @@ void OpPmovmskbGdqpNqUdq(P) {
         pmovmskb(XmmRexbRm(m, rde)) & (Osz(rde) ? 0xffff : 0xff));
 }
 
+void OpSsePmovzxbw(P) {
+  u8 *dst, *src;
+  dst = XmmRexrReg(m, rde);
+  src = GetModrmRegisterXmmPointerRead16(A);
+
+  // src   F E D C B A 9 8 7 6 5 4 3 2 1 0
+  // dst   - - - 3 - - - 2 - - - 1 - - - 0
+
+  u8 src_width = 1;
+  u8 dst_width = 4;
+
+  u8 dst_width_zx = dst_width - src_width;
+
+  // ???
+  IGNORE_RACES_START();
+
+  memcpy(dst + 0xC, src + 0x3, src_width);
+  memcpy(dst + 0x8, src + 0x2, src_width);
+  memcpy(dst + 0x4, src + 0x1, src_width);
+  // memcpy(dst + 0x0, src + 0x0, src_width);
+
+  memset(dst + 0xC + src_width, 0, dst_width_zx);
+  memset(dst + 0x8 + src_width, 0, dst_width_zx);
+  memset(dst + 0x4 + src_width, 0, dst_width_zx);
+  memset(dst + 0x0 + src_width, 0, dst_width_zx);
+
+  // ???
+  IGNORE_RACES_END()
+
+  // TODO: jit?
+}
+
+void OpSsePmovzxwd(P) {
+  u8 *dst, *src;
+  dst = XmmRexrReg(m, rde);
+  src = GetModrmRegisterXmmPointerRead16(A);
+
+  // src   F E D C B A 9 8 7 6 5 4 3 2 1 0
+  // dst   - - - - 7 6 5 4 - - - - 3 2 1 0
+  //
+  u8 src_width = 4;
+  u8 dst_width = 8;
+
+  u8 dst_width_zx = dst_width - src_width;
+
+  // ???
+  IGNORE_RACES_START();
+
+  memcpy(dst + 0x8, src + 0x4, src_width);
+  // memcpy(dst + 0x0, src + 0x0, 4);
+
+  memset(dst + 0x8 + src_width, 0, dst_width_zx);
+  memset(dst + 0x0 + src_width, 0, dst_width_zx);
+
+  // ???
+  IGNORE_RACES_END()
+
+  // TODO: jit?
+}
+
 void OpMaskMovDiXmmRegXmmRm(P) {
   void *p[2];
   u64 v;

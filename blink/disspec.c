@@ -1295,6 +1295,7 @@ const char *DisSpecMap2(struct XedDecodedInst *x, char *p) {
 
 const char *DisSpecMap3(struct XedDecodedInst *x, char *p) {
   switch (Opcode(x->op.rde)) {
+    RCASE(0x0E, DisOpPqQqIbVdqWdqIb(x, p, "pblendw"));
     RCASE(0x0F, DisOpPqQqIbVdqWdqIb(x, p, "palignr"));
     RCASE(0xF0, "rorx %Gdqp Edqp Ib");
     case 0x44:  // pclmulqdq
